@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Programa del corazón ❤️</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        /* ===== ESTILOS GENERALES ===== */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+            background: radial-gradient(circle at top, #ffd6e8, #f3a9c9, #412038);
+            color: #fff;
+            text-align: center;
+        }
+
+        .card {
+            background: rgba(0, 0, 0, 0.35);
+            padding: 24px 20px 30px;
+            border-radius: 28px;
+            box-shadow: 0 14px 40px rgba(0, 0, 0, 0.45);
+            max-width: 420px;
+            width: 90%;
+            backdrop-filter: blur(8px);
+        }
+
+        .heart-wrapper {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 20%, #ff9ad5, #ff3877);
+            box-shadow: 0 0 25px rgba(255, 71, 133, 0.9);
+            margin-bottom: 14px;
+        }
+
+        .heart {
+            font-size: 52px;
+            animation: latido 1s infinite ease-in-out;
+            cursor: pointer;
+        }
+
+        @keyframes latido {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.15); }
+            50% { transform: scale(0.95); }
+            75% { transform: scale(1.08); }
+        }
+
+        .titulo {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .sub {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 16px;
+        }
+
+        .codigo {
+            font-family: "Fira Code", "Consolas", monospace;
+            font-size: 0.9rem;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px 12px;
+            border-radius: 12px;
+            display: inline-block;
+            text-align: left;
+            white-space: pre;
+            margin-bottom: 18px;
+        }
+
+        .mensaje {
+            font-size: 1rem;
+            line-height: 1.6;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.5s ease;
+        }
+
+        .mensaje.activo {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .firma {
+            margin-top: 18px;
+            font-size: 0.8rem;
+            opacity: 0.9;
+        }
+
+        /* Mejora de usabilidad en móvil: tocar toda la tarjeta */
+        .click-hint {
+            font-size: 0.8rem;
+            margin-top: 8px;
+            opacity: 0.85;
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                padding: 20px 16px 24px;
+            }
+
+            .codigo {
+                font-size: 0.8rem;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card" id="card">
+        <div class="heart-wrapper">
+            <div class="heart" id="corazon">💗</div>
+        </div>
+
+        <div class="titulo">Programa del corazón iniciado…</div>
+        <div class="sub">Toca el corazón (o la tarjeta) para ver la propuesta 💫</div>
+
+        <div class="codigo">
+if (tú == dispuesta) {
+    intentarlo_contigo();
+} else {
+    seguir_sonriéndote();
+}
+        </div>
+
+        <div class="mensaje" id="mensaje">
+            <strong>
+                Mi propuesta es simple:  
+                quiero intentarlo contigo,  
+                bonito, real y sin complicaciones. 💖
+            </strong>
+            <div class="click-hint">
+                Si te gusta la idea, solo dime “sí”… y empezamos nuestra versión 1.0. 💾✨
+            </div>
+        </div>
+
+        <div class="firma">
+            – Enviado desde el corazón de Jorge 💻❤️
+        </div>
+    </div>
+
+    <script>
+        const card = document.getElementById("card");
+        const heart = document.getElementById("corazon");
+        const mensaje = document.getElementById("mensaje");
+
+        function mostrarMensaje() {
+            mensaje.classList.add("activo");
+        }
+
+        // Click / touch en el corazón o en toda la tarjeta
+        heart.addEventListener("click", mostrarMensaje);
+        card.addEventListener("click", (e) => {
+            // Evita doble disparo por el corazón
+            if (!mensaje.classList.contains("activo")) {
+                mostrarMensaje();
+            }
+        });
+
+        // Por si en algún celu no funciona bien el click, lo mostramos solo
+        // después de unos segundos como respaldo:
+        setTimeout(() => {
+            if (!mensaje.classList.contains("activo")) {
+                mostrarMensaje();
+            }
+        }, 6000);
+    </script>
+</body>
+</html>
